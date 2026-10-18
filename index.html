@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAEOUlEQVR4nO3dPU4jQRRF4WI0YmJW4JBtTMZiWA+LmYw1OENCQiyDbIKWkAW+prq76v35fCET0EwfveeyG3Fze3dowDm/vC8AcREHJOKARByQiAMScUAiDkjEAYk4IBEHJOKARByQiAMScUAiDkjEAYk4IBEHJOKARByQiAMScUAiDki/vS+gtdbu3x+9L0F6OTx5X4IbJgck4oBEHJCIAxJxQHI4rUQ+m1x29soLH2dCHGVTOy2mWCjEMVKxUHjNMcv9+2PeBbogjrlSJ0IcFpImQhx20iUS9wVpgRd0Z92/P2b50ZgcDrLMD+LwkWLFEIen4H0Qh7PIfRCHv7B9xD2tBPT9lDHqvsY8whDHLqd3dGcoAftgrQzzcnjaeXej7RfiGGx/InEQxxSbEwk1PIhjoux9EMdcqbcMcVhY20eQ4UEcRjLOD+Kws6qPCMODOEzlmh/EEZf78CAOa4mGB3E46O/Dd3gQByTi8JFiuRBHdI6bhTggEYeb+JuFOCARRwJeLzuIw1PwzUIckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnF4cn+E+DLiSMDrIxjigEQcboLvlEYcuIA4onN85oM4fMTfKY04cAFxOOgfG77PERKHtRQLZUEccbk/fkwcphKNjUYcllaV4T42GnGYyTUzFsRhYW0ZEcZG468mzJZxYHxicky0rYwgY6MxOSbZPDDilNGIY7jUe+QL4hhmfxahxkYjjp0GzoloZTTiWGXeyghYRuO0EkHMMhpxuAtbRiMOX5HLaLzm8BI8iwWTw0GKMlrkyRHk3aThNzJLGS1yHPUkymJBHBbSZbEgjrmSZrEgjllSZ7EgjpEKBHGKOMYolsWC9zl6XT5aBzl4j0UcXXrufb0+bm7vDsbfst5/4qlK+4XJMVil9IljvDJ9EMcPtq2JGn3EPcrGWd4vh6caN3stJscsBXoiji7XuVyIo9cV9kEcK1xbH8SxzlX1QRyrXU8fxLHFlfRBHBvFeRtmHuIwlWt4EMd25ZcLcexSuw/i2KtwH8QxQNU+iGOMkn0QxzD1DrfE4Szy8CCOkYotF+IYrFIfxDFemT6IY4oafRDHLAX6II6Jsh9uiSOcOMODOOZKvVzi/lJTGRt+J+r49tqeH7588c/ff+MuqguTw0L//Di+vR7fXs/+08fzw8e3YqYiDiM9fagsTln2QRx2LvfRU8bCrA/iMKX66C9jYdMHcVj73sfaMhYGfRAHJOJwcDo8to2NxezhQRw+UryzThxu4vdBHJ6C90EckIgDksMHb8FnKT4xOZzt+ax19ue0xAGJOPxtGwAGj3cQRwhr77TNgz/EEUX//TZ7JIw4Aum565YPCzr8MR786OwnavbPkBIHJNYKJOKARByQiAMScUAiDkjEAYk4IBEHJOKARByQiAMScUAiDkjEAYk4IBEHJOKA9B/CcjA5CG+PZgAAAABJRU5ErkJggg==">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="RITA">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#06111f">
+<title>RITA | Rhinoplasty Image Targeting Assistant</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='20' fill='%2306111f'/%3E%3Cpath d='M23 82V15h27c14 0 24 9 24 22 0 10-5 17-14 20l18 25H62L46 59h-8v23H23Z' fill='none' stroke='%232df28a' stroke-width='7'/%3E%3Ccircle cx='50' cy='60' r='5' fill='%23ffd166'/%3E%3C/svg%3E">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{--bg:#06111f;--panel:#0d1b2e;--panel2:#10223b;--line:#23405f;--text:#edf5ff;--muted:#9ab0cd;--green:#2df28a;--cyan:#35d7ff;--yellow:#ffd166;--red:#ff5570}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:radial-gradient(circle at top left,#102849 0,#07111f 46%,#040912 100%);min-height:100vh}
+header{position:sticky;top:0;z-index:20;background:rgba(6,17,31,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:52px;height:52px;border-radius:14px;background:#0a1830;border:1px solid var(--line);display:grid;place-items:center}
+.logo svg{width:42px;height:42px}
+h1{margin:0;font-size:24px;letter-spacing:2px}
+.sub{font-size:13px;color:var(--muted)}.sub b{color:var(--green)}
+.credit{font-size:11px;color:var(--muted);opacity:.8}
+.patbar{display:flex;gap:8px;align-items:center;flex:1;justify-content:flex-end;min-width:260px}
+.patbar select{max-width:340px}
+nav{display:flex;gap:6px;padding:0 10px 10px;overflow-x:auto;scrollbar-width:none}
+nav button{flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:15px;font-weight:600}
+nav button.active{background:var(--green);color:#03140b;border-color:var(--green)}
+main{padding:14px;max-width:1200px;margin:0 auto}
+.page{display:none}.page.active{display:block}
+.card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:14px;box-shadow:0 14px 42px rgba(0,0,0,.3)}
+.card h3{margin:0 0 10px;font-size:17px}
+.lbl{font-size:13px;color:var(--muted);margin:10px 0 6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button,.chip{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#0a1628;color:var(--text);font-size:15px}
+.seg button.on{background:var(--cyan);color:#021320;border-color:var(--cyan);font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:#132a47;color:var(--text);font-size:15px;font-weight:600;cursor:pointer;text-align:center}
+.btn.primary{background:var(--green);color:#03140b;border-color:var(--green)}
+.btn.danger{background:transparent;color:var(--red);border-color:var(--red)}
+.btn.sm{min-height:44px;padding:0 12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.row>*{flex:1 1 140px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.field label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+input,select,textarea{width:100%;min-height:44px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#071322;color:var(--text);font-size:16px;font-family:inherit}
+textarea{min-height:120px;resize:vertical;line-height:1.45}
+input[type=range]{padding:0;min-height:36px;accent-color:var(--green)}
+input[type=checkbox]{width:22px;height:22px;min-height:0;accent-color:var(--green)}
+.hint{font-size:13px;color:var(--muted);margin:10px 0 0;line-height:1.45}
+.hidden{display:none!important}
+.stage{position:relative;aspect-ratio:3/4;width:min(100%,calc(68vh*0.75));margin:0 auto;background:#000;border-radius:14px;overflow:hidden;touch-action:none}
+.stage video,.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage video{object-fit:cover}
+.ctrl{display:grid;grid-template-columns:90px 1fr 56px;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:var(--muted)}
+.vgroup{margin-bottom:12px}.vgroup h4{margin:0 0 6px;font-size:14px;color:var(--cyan)}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap}
+.thumb{position:relative;width:96px;aspect-ratio:3/4;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#000}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb span{position:absolute;left:0;right:0;bottom:0;font-size:11px;padding:2px 4px;background:rgba(0,0,0,.7)}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px}
+.item{min-height:44px;border-radius:12px;border:1px solid var(--line);background:#0a1628;color:var(--text);font-size:14px;padding:6px 10px;text-align:left}
+.item.done{background:rgba(45,242,138,.18);border-color:var(--green)}
+.item.done::before{content:"✓ ";color:var(--green);font-weight:700}
+.item.not{background:rgba(255,85,112,.14);border-color:var(--red)}
+.item.not::before{content:"✗ ";color:var(--red);font-weight:700}
+.chip.on{background:var(--yellow);color:#201600;border-color:var(--yellow);font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600}
+.flag{color:var(--yellow);font-weight:700}
+.ok{color:var(--green)}
+.tablewrap{overflow-x:auto}
+.plist .pi{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border-bottom:1px solid var(--line);cursor:pointer}
+.plist .pi:hover{background:#0a1628}
+.plist .pi small{color:var(--muted)}
+.cmpbox{position:relative;width:min(100%,calc(64vh*0.75));aspect-ratio:3/4;margin:0 auto;border-radius:14px;overflow:hidden;background:#000}
+.cmpbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmpbox .lab{position:absolute;top:8px;padding:4px 8px;border-radius:8px;background:rgba(0,0,0,.6);font-size:13px}
+#collageImg{width:100%;max-width:640px;display:block;margin:10px auto 0;border-radius:12px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#0b2140;border:1px solid var(--cyan);padding:12px 18px;border-radius:14px;font-size:15px;z-index:99;opacity:0;pointer-events:none;transition:opacity .25s;max-width:90vw}
+#toast.show{opacity:1}
+#flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:98;transition:opacity .3s}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:90;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal .box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;max-width:560px;width:100%;max-height:90vh;overflow:auto}
+.modal img{width:100%;border-radius:12px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:10px 0}
+.kpi div{background:#0a1628;border:1px solid var(--line);border-radius:12px;padding:10px}
+.kpi b{display:block;font-size:22px;color:var(--green)}
+.kpi small{color:var(--muted)}
+.ph{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.ph code{background:#0a1628;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:13px;cursor:pointer}
+
+nav i{font-style:normal;display:none}
+nav .short{display:none}
+body{touch-action:manipulation;-webkit-text-size-adjust:100%}
+.stage{width:min(100%,calc(68dvh*0.75))}
+.cmpbox{width:min(100%,calc(64dvh*0.75))}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+.thumb{width:auto}
+@media (max-width:640px){
+  body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+  header{position:relative;backdrop-filter:none;-webkit-backdrop-filter:none;background:#06111f}
+  .top{padding:8px 12px;gap:8px}
+  .logo{width:40px;height:40px;border-radius:11px}.logo svg{width:32px;height:32px}
+  h1{font-size:19px}.sub{font-size:11px}.credit{font-size:10px}
+  .patbar{min-width:0;width:100%;flex-basis:100%}
+  .patbar select{max-width:none;flex:1}
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(7,1fr);gap:0;padding:6px 4px calc(6px + env(safe-area-inset-bottom));background:rgba(6,17,31,.97);backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.1);overflow:visible}
+  nav button{min-height:52px;padding:2px 0;border:0;border-radius:10px;background:transparent;font-size:10.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+  nav button.active{background:rgba(45,242,138,.16);color:var(--green)}
+  nav i{display:block;font-size:20px;line-height:1}
+  nav .full{display:none}nav .short{display:block}
+  main{padding:10px}
+  .card{padding:12px;border-radius:16px;margin-bottom:10px}
+  .seg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -12px;padding:0 12px 2px;-webkit-overflow-scrolling:touch}
+  .seg::-webkit-scrollbar,nav::-webkit-scrollbar{display:none}
+  .seg button{flex:0 0 auto}
+  #rItems{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
+  .row>*{flex:1 1 100%}
+  #edCard .row>*{flex:1 1 30%}
+  .ctrl{grid-template-columns:62px 1fr 48px;font-size:13px}
+  .stage,.cmpbox{width:100%;max-height:none;border-radius:12px}
+  .stage{width:min(100%,calc((100dvh - 150px)*0.75))}
+  .grid2{grid-template-columns:1fr 1fr}
+  .grid2 .field:has(#fHosp),.grid2 .field:has(#fProc){grid-column:1/-1}
+  .items{grid-template-columns:1fr 1fr}
+  .item{font-size:13px}
+  .kpi{grid-template-columns:1fr 1fr}.kpi b{font-size:18px}
+  table{font-size:12px}
+  #toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+  .modal{padding:0;align-items:flex-end}
+  .modal .box{border-radius:20px 20px 0 0;max-height:94dvh;padding:14px 14px calc(14px + env(safe-area-inset-bottom))}
+  .modal .row>*{flex:1 1 45%}
+  .hint{font-size:12.5px}
+}
+@media (max-width:640px) and (orientation:landscape){
+  .stage{width:min(100%,calc((100dvh - 40px)*0.75))}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand">
+      <div class="logo"><svg viewBox="0 0 96 96" aria-label="RITA logo">
+        <path d="M23 82V15h27c14 0 24 9 24 22 0 10-5 17-14 20l18 25H62L46 59h-8v23H23Z" fill="none" stroke="#2df28a" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M39 23h10c7 0 12 5 12 12s-5 12-12 12H39" fill="none" stroke="#35d7ff" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="72" cy="80" r="5" fill="#ffd166"/></svg></div>
+      <div>
+        <h1>RITA</h1>
+        <div class="sub"><b>R</b>hinoplasty <b>I</b>mage <b>T</b>argeting <b>A</b>ssistant</div>
+        <div class="credit">Developers: Mengu &amp; Koder (2026)</div>
+      </div>
+    </div>
+    <div class="patbar">
+      <select id="curSel" aria-label="Current patient"></select>
+      <button class="btn sm primary" id="newPat">+ New</button>
+    </div>
+  </div>
+  <nav id="nav">
+    <button data-p="capture" class="active"><i>◎</i><span class="full">Capture</span><span class="short">Capture</span></button>
+    <button data-p="patients"><i>☰</i><span class="full">Patient</span><span class="short">Patient</span></button>
+    <button data-p="compare"><i>◧</i><span class="full">Compare</span><span class="short">Compare</span></button>
+    <button data-p="face"><i>☺</i><span class="full">Face Analysis</span><span class="short">Face</span></button>
+    <button data-p="opnote"><i>✎</i><span class="full">Op Note</span><span class="short">Note</span></button>
+    <button data-p="research"><i>∑</i><span class="full">Research</span><span class="short">Study</span></button>
+    <button data-p="backup"><i>⇅</i><span class="full">Backup</span><span class="short">Backup</span></button>
+  </nav>
+</header>
+
+<main>
+<!-- CAPTURE -->
+<section class="page active" id="p-capture">
+  <div class="card">
+    <div class="lbl">View</div><div class="seg" id="viewSeg"></div>
+    <div class="lbl">Phase</div><div class="seg" id="phaseSeg"></div>
+    <div class="row">
+      <label class="btn primary">Camera App<input type="file" accept="image/*" capture="environment" id="inCam" hidden></label>
+      <label class="btn">Photo Library<input type="file" accept="image/*" id="inLib" hidden></label>
+      <button class="btn" id="btnLive">Live Guide Camera</button>
+    </div>
+    <p class="hint"><b>Camera App</b> opens the native iPhone/iPad camera with full autofocus (recommended for lateral, oblique and close views). Stand about 1 m away and use 2× zoom to avoid lens distortion, then align the photo on the guide.</p>
+  </div>
+
+  <div class="card hidden" id="liveCard">
+    <div class="stage"><video id="video" playsinline muted autoplay></video><canvas id="liveOv"></canvas></div>
+    <div class="row">
+      <button class="btn primary" id="liveShot">Capture</button>
+      <button class="btn" id="liveFocus">Refocus</button>
+      <button class="btn" id="liveStop">Close</button>
+    </div>
+    <div class="ctrl hidden" id="lensWrap"><span>Lens</span><select id="liveLens"></select><span></span></div>
+    <div class="ctrl hidden" id="zoomWrap"><span>Zoom</span><input type="range" id="liveZoom"><span id="liveZoomV"></span></div>
+    <p class="hint">If focus fails in this mode, close it and use <b>Camera App</b>.</p>
+  </div>
+
+  <div class="card hidden" id="edCard">
+    <h3>Align &amp; Save <span id="edInfo" style="color:var(--muted);font-weight:400;font-size:14px"></span></h3>
+    <div class="stage" id="edStage"><canvas id="edCv" width="1500" height="2000"></canvas></div>
+    <p class="hint">Drag to move, pinch to zoom.</p>
+    <div class="ctrl"><span>Rotate</span><input type="range" id="edRot" min="-30" max="30" step="0.1" value="0"><span id="edRotV">0°</span></div>
+    <div class="ctrl"><span>Zoom</span><input type="range" id="edZoom" min="0.5" max="4" step="0.01" value="1"><span id="edZoomV">1.00</span></div>
+    <div class="ctrl"><span>Ghost</span><select id="edGhost"><option value="">None</option><option value="preop">Preop (same view)</option><option value="target">Target (same view)</option></select><span></span></div>
+    <div class="row">
+      <button class="btn" id="edAuto">Auto-align</button>
+      <button class="btn" id="edFlip">Mirror</button>
+      <button class="btn" id="ed180">Rotate 180°</button>
+      <button class="btn" id="edGuide">Guide: On</button>
+      <button class="btn" id="edReset">Reset</button>
+    </div>
+    <div class="row">
+      <button class="btn primary" id="edSave">Save Photo</button>
+      <button class="btn danger" id="edCancel">Discard</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Photos · <span id="thumbTitle">no patient selected</span></h3>
+    <div id="thumbs"></div>
+  </div>
+</section>
+
+<!-- PATIENT -->
+<section class="page" id="p-patients">
+  <div class="card">
+    <h3>Patient Record</h3>
+    <div class="grid2">
+      <div class="field"><label>First name</label><input id="fFirst" autocomplete="off"></div>
+      <div class="field"><label>Last name</label><input id="fLast" autocomplete="off"></div>
+      <div class="field"><label>Chart / Protocol no.</label><input id="fChart" autocomplete="off"></div>
+      <div class="field"><label>Sex</label><select id="fSex"><option value="">–</option><option>Female</option><option>Male</option></select></div>
+      <div class="field"><label>Birth year</label><input id="fBirth" type="number" inputmode="numeric" min="1900" max="2100"></div>
+      <div class="field"><label>Surgery date</label><input id="fDate" type="date"></div>
+      <div class="field"><label>Procedure</label><select id="fProc"><option>Primary rhinoplasty</option><option>Revision rhinoplasty</option><option>Septorhinoplasty</option><option>Functional septoplasty</option><option>Other</option></select></div>
+      <div class="field"><label>Approach</label><select id="fAppr"><option value="">–</option><option>Open</option><option>Closed</option><option>Preservation</option></select></div>
+      <div class="field"><label>Hospital / Clinic</label><input id="fHosp" autocomplete="off"></div>
+    </div>
+    <label style="display:flex;gap:10px;align-items:center;margin-top:12px"><input type="checkbox" id="fConsent"> Photo &amp; data consent obtained</label>
+  </div>
+  <div class="card">
+    <h3>Surgical Steps</h3>
+    <p class="hint" style="margin-top:0">Tap to cycle: not recorded → <span class="ok">done</span> → <span style="color:var(--red)">not done</span>.</p>
+    <div class="lbl">Grafts</div><div class="items" id="itemsG"></div>
+    <div class="lbl">Maneuvers</div><div class="items" id="itemsM"></div>
+    <div class="lbl">Surgical notes (type or use keyboard dictation 🎤)</div>
+    <textarea id="fNotes" placeholder="e.g. Bilateral spreader graft placed, columellar strut placed, lateral osteotomy not performed."></textarea>
+    <div class="row">
+      <button class="btn" id="btnDetect">Detect steps from notes</button>
+      <button class="btn primary" id="btnSavePat">Save Patient</button>
+      <button class="btn danger" id="btnDelPat">Delete Patient</button>
+    </div>
+  </div>
+  <div class="card">
+    <h3>All Patients</h3>
+    <input id="pSearch" placeholder="Search name, chart no., step (e.g. spreader)…">
+    <div class="plist" id="pList"></div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="page" id="p-compare">
+  <div class="card">
+    <h3>Auto Collage</h3>
+    <div class="grid2">
+      <div class="field"><label>Left column</label><select id="cA"></select></div>
+      <div class="field"><label>Right column</label><select id="cB"></select></div>
+    </div>
+    <div class="lbl">Views</div><div class="seg" id="cViews"></div>
+    <label style="display:flex;gap:10px;align-items:center;margin-top:12px"><input type="checkbox" id="cAnon" checked> Anonymize (chart no. only)</label>
+    <div class="row"><button class="btn primary" id="cMake">Create Collage</button><button class="btn" id="cShare" disabled>Save / Share</button></div>
+    <img id="collageImg" class="hidden" alt="Collage">
+  </div>
+  <div class="card">
+    <h3>Slider Compare</h3>
+    <div class="grid2"><div class="field"><label>View</label><select id="sView"></select></div></div>
+    <div class="cmpbox" id="cmpBox" style="margin-top:10px">
+      <img id="sImgB" alt=""><img id="sImgA" alt="">
+      <div class="lab" style="left:8px" id="sLabA">A</div><div class="lab" style="right:8px" id="sLabB">B</div>
+    </div>
+    <input type="range" id="sRange" min="0" max="100" value="50" style="margin-top:10px">
+  </div>
+</section>
+
+<!-- FACE -->
+<section class="page" id="p-face">
+  <div class="card">
+    <h3>Facial Asymmetry Analysis</h3>
+    <div class="grid2"><div class="field"><label>Frontal photo</label><select id="faPhoto"></select></div></div>
+    <div class="row"><button class="btn primary" id="faRun">Analyze</button><label class="btn">Load file<input type="file" accept="image/*" id="faFile" hidden></label><button class="btn" id="faSave" disabled>Save to Patient</button></div>
+    <p class="hint">Use a straight frontal photo, neutral expression, eyes open. Measurements are relative (% of intercanthal distance and degrees). Patient's right = image left. This is a measurement aid, not a diagnosis.</p>
+  </div>
+  <div class="card hidden" id="faOut">
+    <canvas id="faCv" style="width:100%;max-width:640px;display:block;margin:0 auto;border-radius:12px"></canvas>
+    <div class="kpi" id="faKpi"></div>
+    <div class="tablewrap"><table id="faTable"></table></div>
+  </div>
+</section>
+
+<!-- OP NOTE -->
+<section class="page" id="p-opnote">
+  <div class="card">
+    <h3>Epicrisis Template</h3>
+    <p class="hint" style="margin-top:0">Paste or load your own template. Tap a placeholder to insert it.</p>
+    <div class="ph" id="phList"></div>
+    <textarea id="tpl" style="min-height:240px"></textarea>
+    <div class="row">
+      <label class="btn">Load .txt<input type="file" accept=".txt,text/plain" id="tplFile" hidden></label>
+      <button class="btn" id="tplSave">Save Template</button>
+      <button class="btn" id="tplDefault">Restore Default</button>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Generated Note</h3>
+    <p class="hint" style="margin-top:0">Fills from the current patient's record and surgical steps. Edit freely before copying.</p>
+    <button class="btn primary" id="noteGen">Generate for Current Patient</button>
+    <textarea id="noteOut" style="min-height:260px;margin-top:10px"></textarea>
+    <div class="row"><button class="btn" id="noteCopy">Copy</button><button class="btn" id="noteShare">Save / Share .txt</button></div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="page" id="p-research">
+  <div class="card">
+    <h3>Research Query</h3>
+    <div class="field"><label>Quick query</label><input id="rQuick" placeholder="e.g. female revision patients with spreader graft"></div>
+    <div class="row"><button class="btn" id="rParse">Apply Quick Query</button></div>
+    <div class="lbl">Required steps (all must be done)</div><div class="seg" id="rItems"></div>
+    <div class="grid2" style="margin-top:10px">
+      <div class="field"><label>Sex</label><select id="rSex"><option value="">Any</option><option>Female</option><option>Male</option></select></div>
+      <div class="field"><label>Procedure</label><select id="rProc"><option value="">Any</option><option>Primary rhinoplasty</option><option>Revision rhinoplasty</option><option>Septorhinoplasty</option><option>Functional septoplasty</option><option>Other</option></select></div>
+      <div class="field"><label>From</label><input type="date" id="rFrom"></div>
+      <div class="field"><label>To</label><input type="date" id="rTo"></div>
+    </div>
+    <div class="row"><button class="btn primary" id="rRun">Run</button><button class="btn" id="rClear">Clear</button><button class="btn" id="rCsv" disabled>Export CSV (anonymized)</button></div>
+  </div>
+  <div class="card hidden" id="rOut">
+    <div class="kpi" id="rKpi"></div>
+    <div id="rCo"></div>
+    <div class="tablewrap"><table id="rTable"></table></div>
+  </div>
+</section>
+
+<!-- BACKUP -->
+<section class="page" id="p-backup">
+  <div class="card">
+    <h3>Settings</h3>
+    <div class="grid2"><div class="field"><label>Surgeon name (for notes)</label><input id="sSurgeon"></div></div>
+    <div class="row"><button class="btn" id="sSaveSet">Save Settings</button></div>
+  </div>
+  <div class="card">
+    <h3>Backup &amp; Portability</h3>
+    <p class="hint" style="margin-top:0">All data stays on this device (browser storage). Safari may clear it, so export a backup regularly and keep it in your own secure storage. Add RITA to the Home Screen for more reliable storage.</p>
+    <div class="kpi" id="bStats"></div>
+    <div class="row">
+      <button class="btn primary" id="bExport">Export Full Backup (.zip)</button>
+      <label class="btn">Import Backup<input type="file" accept=".zip" id="bImport" hidden></label>
+      <button class="btn" id="bPersist">Request Persistent Storage</button>
+    </div>
+    <p class="hint">Patient photos and records are personal health data. Keep backups encrypted, follow your institution's rules and data protection law (KVKK), and obtain patient consent.</p>
+  </div>
+</section>
+</main>
+
+<div id="toast"></div><div id="flash"></div>
+<div class="modal hidden" id="modal"><div class="box">
+  <img id="mImg" alt=""><div id="mInfo" class="hint"></div>
+  <div class="row"><button class="btn" id="mAna">Face Analysis</button><button class="btn" id="mShare">Share</button><button class="btn danger" id="mDel">Delete</button><button class="btn primary" id="mClose">Close</button></div>
+</div></div>
+
+<script type="module">
+/* ---------- constants ---------- */
+const MP='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+const MODEL='https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
+const VIEWS=[{k:'frontal',n:'Frontal'},{k:'r_oblique',n:'Right Oblique 45°'},{k:'l_oblique',n:'Left Oblique 45°'},{k:'r_lateral',n:'Right Lateral'},{k:'l_lateral',n:'Left Lateral'},{k:'basal',n:'Basal'},{k:'helicopter',n:'Helicopter'},{k:'or_head',n:'OR Head End'}];
+const PHASES=[{k:'preop',n:'Preop'},{k:'target',n:'Target'},{k:'intraop',n:'Intraop'},{k:'postop',n:'Postop'}];
+const ITEMS=[
+ {k:'spreader_graft',n:'Spreader graft',g:'G',s:['spreader graft','spreader greft']},
+ {k:'columellar_strut',n:'Columellar strut',g:'G',s:['columellar strut','kolumellar strut','kolumella strut']},
+ {k:'seg',n:'Septal extension graft',g:'G',s:['septal extension','septal uzatma','seg']},
+ {k:'tip_graft',n:'Tip graft',g:'G',s:['tip graft','tip greft','uç grefti','uç greft']},
+ {k:'shield',n:'Shield graft',g:'G',s:['shield graft','shield greft','kalkan greft']},
+ {k:'arg',n:'Alar rim graft',g:'G',s:['alar rim graft','alar rim greft','rim graft','rim greft']},
+ {k:'lcs',n:'Lateral crural strut',g:'G',s:['lateral crural strut','lateral krural strut','lcs']},
+ {k:'radix',n:'Radix graft',g:'G',s:['radix graft','radiks greft','radix greft']},
+ {k:'dcf',n:'Diced cartilage (DCF)',g:'G',s:['diced cartilage','doğranmış kıkırdak','dcf']},
+ {k:'ear',n:'Ear (conchal) cartilage',g:'G',s:['ear cartilage','conchal cartilage','kulak kıkırdağı','konka kıkırdağı']},
+ {k:'rib',n:'Rib cartilage',g:'G',s:['rib cartilage','costal cartilage','kaburga','kosta kıkırdağı']},
+ {k:'fascia',n:'Fascia',g:'G',s:['fascia','fasya']},
+ {k:'spreader_flap',n:'Spreader flap',g:'M',s:['spreader flap','autospreader','oto spreader','otospreader']},
+ {k:'hump',n:'Dorsal hump reduction',g:'M',s:['hump','kambur','dorsal reduction','dorsum redüksiyon']},
+ {k:'preservation',n:'Dorsal preservation',g:'M',s:['dorsal preservation','push down','let down','koruyucu']},
+ {k:'lat_osteo',n:'Lateral osteotomy',g:'M',s:['lateral osteotomy','lateral osteotomi']},
+ {k:'med_osteo',n:'Medial osteotomy',g:'M',s:['medial osteotomy','medial osteotomi']},
+ {k:'septoplasty',n:'Septoplasty',g:'M',s:['septoplasty','septoplasti']},
+ {k:'turbinate',n:'Turbinate reduction',g:'M',s:['turbinate','turbinat','alt konka','konka redüksiyon','konka küçültme']},
+ {k:'cephalic',n:'Cephalic trim',g:'M',s:['cephalic trim','cephalic resection','sefalik']},
+ {k:'dome',n:'Dome sutures',g:'M',s:['dome suture','transdomal','interdomal','dom sütür']},
+ {k:'tig',n:'Tongue-in-groove',g:'M',s:['tongue in groove','tongue-in-groove','tig']},
+ {k:'alar_base',n:'Alar base resection',g:'M',s:['alar base','alar wedge','weir','alar taban']},
+ {k:'piezo',n:'Piezo surgery',g:'M',s:['piezo']}
+];
+const NEG=['not ','no ','without','none','yapılmadı','yapmadık','konulmadı','koymadık','kullanılmadı','kullanmadık','uygulanmadı','uygulamadık','gerekmedi','yok','değil','olmadı'];
+const DEFAULT_TPL=`OPERATION NOTE / EPICRISIS
+
+Patient: {{name}}    Chart No: {{chart}}
+Age / Sex: {{age}} / {{sex}}
+Date of surgery: {{date}}
+Hospital: {{hospital}}
+Surgeon: {{surgeon}}
+Procedure: {{procedure}}
+Approach: {{approach}}
+
+Grafts used:
+{{grafts}}
+
+Maneuvers performed:
+{{maneuvers}}
+
+Not performed:
+{{not_done}}
+
+Surgical notes:
+{{notes}}
+
+Preoperative facial analysis:
+{{face_analysis}}
+`;
+const PLACEHOLDERS=['name','chart','age','sex','date','hospital','surgeon','procedure','approach','grafts','maneuvers','not_done','notes','face_analysis'];
+
+/* ---------- utils ---------- */
+const $=id=>document.getElementById(id);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lower=s=>String(s||'').toLocaleLowerCase('tr');
+let toastT;function toast(m,ms=2600){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),ms)}
+function flash(){const f=$('flash');f.style.transition='none';f.style.opacity='.8';requestAnimationFrame(()=>{f.style.transition='opacity .35s';f.style.opacity='0'})}
+function vName(k){return (VIEWS.find(v=>v.k===k)||{}).n||k}
+function phName(k){return (PHASES.find(v=>v.k===k)||{}).n||k}
+function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src})}
+async function blobImg(b){const u=URL.createObjectURL(b);const i=await loadImg(u);i._url=u;return i}
+async function shareOrDownload(blob,name){
+  const f=new File([blob],name,{type:blob.type||'application/octet-stream'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:name});return}catch(e){if(e.name==='AbortError')return}}
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},3000);
+}
+const canvasBlob=(c,t='image/jpeg',q=.92)=>new Promise(r=>c.toBlob(r,t,q));
+function patLabel(p,anon){if(!p)return'';if(anon)return p.chart?('Chart '+p.chart):('Case '+p.id.slice(-5));return [p.first,p.last].filter(Boolean).join(' ')+(p.chart?' · '+p.chart:'')}
+function ageOf(p){if(!p.birth)return null;const y=p.date?+p.date.slice(0,4):new Date().getFullYear();const a=y-(+p.birth);return a>0&&a<120?a:null}
+
+/* ---------- IndexedDB ---------- */
+let db;
+function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open('rita_v3',1);r.onupgradeneeded=()=>{const d=r.result;d.createObjectStore('patients',{keyPath:'id'});const ph=d.createObjectStore('photos',{keyPath:'id'});ph.createIndex('pid','patientId');d.createObjectStore('settings',{keyPath:'key'})};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+const tx=(s,m='readonly')=>db.transaction(s,m).objectStore(s);
+const req=r=>new Promise((res,rej)=>{r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+const dbPut=(s,v)=>req(tx(s,'readwrite').put(v));
+const dbGet=(s,k)=>req(tx(s).get(k));
+const dbAll=s=>req(tx(s).getAll());
+const dbDel=(s,k)=>req(tx(s,'readwrite').delete(k));
+const photosOf=pid=>req(tx('photos').index('pid').getAll(pid));
+async function getSet(k,d){const r=await dbGet('settings',k);return r?r.value:d}
+const setSet=(k,v)=>dbPut('settings',{key:k,value:v});
+
+/* ---------- state ---------- */
+let patients=[];let cur=null;let view='frontal',phase='preop';
+
+async function refreshPatients(keepId){
+  patients=(await dbAll('patients')).sort((a,b)=>(b.updated||0)-(a.updated||0));
+  const sel=$('curSel');const id=keepId??cur?.id;
+  sel.innerHTML='<option value="">— Select patient —</option>'+patients.map(p=>`<option value="${p.id}">${esc(patLabel(p))||'(unnamed)'}${p.date?' · '+p.date:''}</option>`).join('');
+  cur=patients.find(p=>p.id===id)||null;sel.value=cur?cur.id:'';
+  await setSet('lastPatient',cur?cur.id:'');
+  renderPatientForm();renderPList();renderThumbs();fillPhotoSelects();
+}
+$('curSel').onchange=async e=>{cur=patients.find(p=>p.id===e.target.value)||null;await setSet('lastPatient',cur?cur.id:'');renderPatientForm();renderThumbs();fillPhotoSelects()};
+$('newPat').onclick=async()=>{const p={id:uid(),first:'',last:'',items:{},created:Date.now(),updated:Date.now(),procedure:'Primary rhinoplasty'};await dbPut('patients',p);cur=p;await refreshPatients(p.id);go('patients');$('fFirst').focus()};
+async function needPatient(){if(cur)return true;toast('Select or create a patient first');return false}
+
+/* ---------- navigation ---------- */
+function go(p){document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.p===p));document.querySelectorAll('.page').forEach(s=>s.classList.toggle('active',s.id==='p-'+p));if(p!=='capture')stopLive();document.activeElement?.blur?.();if(p==='compare')updateSlider();if(p==='backup')renderStats();window.scrollTo({top:0})}
+$('nav').onclick=e=>{const b=e.target.closest('button');if(b)go(b.dataset.p)};
+
+/* ---------- segments ---------- */
+function seg(el,list,get,set){el.innerHTML=list.map(v=>`<button data-k="${v.k}">${v.n}</button>`).join('');const upd=()=>el.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===get()));el.onclick=e=>{const b=e.target.closest('button');if(!b)return;set(b.dataset.k);upd()};upd()}
+seg($('viewSeg'),VIEWS,()=>view,k=>{view=k;if(ED.img)edDraw();$('edInfo').textContent=`${vName(view)} · ${phName(phase)}`});
+seg($('phaseSeg'),PHASES,()=>phase,k=>{phase=k;$('edInfo').textContent=`${vName(view)} · ${phName(phase)}`});
+
+/* ---------- guides ---------- */
+function drawGuide(ctx,W,H,v){
+  ctx.save();ctx.lineWidth=Math.max(2,W/380);ctx.strokeStyle='rgba(53,215,255,.85)';ctx.fillStyle='rgba(255,209,102,.95)';ctx.setLineDash([W/60,W/90]);
+  const L=(x1,y1,x2,y2)=>{ctx.beginPath();ctx.moveTo(x1*W,y1*H);ctx.lineTo(x2*W,y2*H);ctx.stroke()};
+  const HL=(y,c)=>{ctx.strokeStyle=c||'rgba(53,215,255,.85)';L(.04,y,.96,y)};
+  const VL=(x,c)=>{ctx.strokeStyle=c||'rgba(53,215,255,.85)';L(x,.04,x,.96)};
+  const dot=(x,y)=>{ctx.setLineDash([]);ctx.beginPath();ctx.arc(x*W,y*H,W/70,0,7);ctx.strokeStyle='rgba(255,209,102,.95)';ctx.stroke();ctx.setLineDash([W/60,W/90])};
+  let hint='';
+  switch(v){
+    case'frontal':VL(.5,'rgba(45,242,138,.9)');HL(.40);HL(.58);HL(.70);HL(.86);ctx.setLineDash([]);ctx.strokeStyle='rgba(53,215,255,.45)';ctx.beginPath();ctx.ellipse(.5*W,.56*H,.30*W,.38*H,0,0,7);ctx.stroke();dot(.5,.58);hint='Eyes on upper line · tip on dot · chin on lower line';break;
+    case'r_oblique':case'l_oblique':{const s=v==='r_oblique'?1:-1;VL(.5,'rgba(45,242,138,.9)');VL(.5-s*.13);HL(.40);HL(.58);HL(.86);dot(.5,.58);hint='45° turn · nasal tip touches cheek contour line';break}
+    case'r_lateral':case'l_lateral':{const s=v==='r_lateral'?1:-1;HL(.42,'rgba(45,242,138,.9)');VL(.5+s*.12);VL(.5-s*.2);HL(.58);HL(.86);dot(.5+s*.12,.58);hint='Frankfort plane on green line · tip on dot';break}
+    case'basal':VL(.5,'rgba(45,242,138,.9)');HL(.36);ctx.setLineDash([]);ctx.strokeStyle='rgba(53,215,255,.6)';ctx.beginPath();ctx.moveTo(.5*W,.36*H);ctx.lineTo(.30*W,.66*H);ctx.lineTo(.70*W,.66*H);ctx.closePath();ctx.stroke();hint='Head tilted back · tip near brow level · columella on midline';break;
+    case'helicopter':VL(.5,'rgba(45,242,138,.9)');HL(.42);HL(.70);dot(.5,.70);hint='Camera above forehead · dorsum along midline · tip on dot';break;
+    case'or_head':VL(.5,'rgba(45,242,138,.9)');HL(.60);HL(.42);dot(.5,.42);hint='From patient\'s head · eyes on lower line · tip on dot';break;
+  }
+  ctx.setLineDash([]);ctx.font=`600 ${Math.round(W/34)}px -apple-system,Arial`;ctx.textAlign='center';
+  ctx.fillStyle='rgba(0,0,0,.55)';const tw=ctx.measureText(hint).width;ctx.fillRect(W/2-tw/2-12,H*.012,tw+24,W/34+16);
+  ctx.fillStyle='#ffd166';ctx.fillText(hint,W/2,H*.012+W/34+3);ctx.restore();
+}
+
+/* ---------- live camera ---------- */
+let stream=null,track=null,wake=null,liveRAF=0;
+const camC=id=>({video:id?{deviceId:{exact:id},width:{ideal:1920},height:{ideal:1440}}:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1440}},audio:false});
+function pickLens(cams){
+  // iPhone: "Back Dual Wide/Triple Camera" switches to ultra-wide at close range and loses focus; plain "Back Camera" (1×) keeps focus
+  return cams.find(c=>/^back camera$/i.test(c.label.trim()))||cams.find(c=>/back/i.test(c.label)&&!/ultra|dual|triple/i.test(c.label))||cams.find(c=>/back|rear|environment/i.test(c.label));
+}
+async function startLive(lensId){
+  stopLive(true);
+  try{
+    stream=await navigator.mediaDevices.getUserMedia(camC(lensId));
+    if(!lensId){
+      const cams=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='videoinput');
+      const cur0=stream.getVideoTracks()[0].getSettings().deviceId;const best=pickLens(cams);
+      $('liveLens').innerHTML=cams.map(c=>`<option value="${c.deviceId}">${esc(c.label||'Camera')}</option>`).join('');
+      if(cams.length>1)$('lensWrap').classList.remove('hidden');
+      if(best&&best.deviceId!==cur0){stream.getTracks().forEach(t=>t.stop());stream=await navigator.mediaDevices.getUserMedia(camC(best.deviceId))}
+      $('liveLens').value=stream.getVideoTracks()[0].getSettings().deviceId||best?.deviceId||'';
+    }
+  }catch(e){toast('Camera access failed: '+e.message);return}
+  const v=$('video');v.srcObject=stream;await v.play().catch(()=>{});
+  track=stream.getVideoTracks()[0];$('liveCard').classList.remove('hidden');
+  const caps=track.getCapabilities?track.getCapabilities():{};
+  setFocus(caps);
+  if(caps.zoom){const z=$('liveZoom');z.min=caps.zoom.min;z.max=caps.zoom.max;z.step=caps.zoom.step||.1;z.value=track.getSettings().zoom||caps.zoom.min;$('liveZoomV').textContent=(+z.value).toFixed(1)+'×';$('zoomWrap').classList.remove('hidden')}
+  try{wake=await navigator.wakeLock?.request('screen')}catch{}
+  const loop=()=>{const c=$('liveOv');const r=c.getBoundingClientRect();if(c.width!==Math.round(r.width*2)){c.width=Math.round(r.width*2);c.height=Math.round(r.height*2)}const x=c.getContext('2d');x.clearRect(0,0,c.width,c.height);drawGuide(x,c.width,c.height,view);liveRAF=requestAnimationFrame(loop)};loop();
+  $('liveCard').scrollIntoView({behavior:'smooth'});
+}
+function setFocus(caps){if(caps?.focusMode?.includes('continuous'))track.applyConstraints({advanced:[{focusMode:'continuous'}]}).catch(()=>{})}
+function stopLive(keepUI){cancelAnimationFrame(liveRAF);if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null;try{wake?.release()}catch{}wake=null;if(keepUI===true)return;$('liveCard').classList.add('hidden');$('zoomWrap').classList.add('hidden');$('lensWrap').classList.add('hidden')}
+$('btnLive').onclick=()=>startLive();$('liveStop').onclick=()=>stopLive();
+$('liveLens').onchange=e=>startLive(e.target.value);
+$('liveFocus').onclick=async()=>{if(!track)return;const caps=track.getCapabilities?track.getCapabilities():{};if(caps.focusMode?.includes('single-shot')){await track.applyConstraints({advanced:[{focusMode:'single-shot'}]}).catch(()=>{})}setFocus(caps);toast('Refocusing… If it stays blurry, step back or use Camera App')};
+$('liveZoom').oninput=e=>{track?.applyConstraints({advanced:[{zoom:+e.target.value}]}).catch(()=>{});$('liveZoomV').textContent=(+e.target.value).toFixed(1)+'×'};
+$('liveShot').onclick=async()=>{
+  const v=$('video');if(!v.videoWidth)return;const vw=v.videoWidth,vh=v.videoHeight;
+  let cw=vw,ch=vw*4/3;if(ch>vh){ch=vh;cw=vh*3/4}
+  const c=document.createElement('canvas');c.width=cw;c.height=ch;c.getContext('2d').drawImage(v,(vw-cw)/2,(vh-ch)/2,cw,ch,0,0,cw,ch);
+  flash();const b=await canvasBlob(c,'image/jpeg',.95);stopLive();openEditor(b);
+};
+$('inCam').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)openEditor(f)};
+$('inLib').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)openEditor(f)};
+
+/* ---------- editor ---------- */
+const ED={img:null,W:1500,H:2000,rot:0,zoom:1,px:0,py:0,flip:false,r180:false,guide:true,ghost:null};
+const edCv=$('edCv'),edCtx=edCv.getContext('2d');
+function baseScale(){return Math.max(ED.W/ED.img.naturalWidth,ED.H/ED.img.naturalHeight)}
+function renderTo(ctx,withOverlay){
+  const {W,H}=ED;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+  if(!ED.img)return;const s=baseScale()*ED.zoom;
+  ctx.save();ctx.translate(W/2+ED.px,H/2+ED.py);ctx.rotate((ED.rot+(ED.r180?180:0))*Math.PI/180);ctx.scale(ED.flip?-s:s,s);
+  ctx.drawImage(ED.img,-ED.img.naturalWidth/2,-ED.img.naturalHeight/2);ctx.restore();
+  if(withOverlay){
+    if(ED.ghost){ctx.save();ctx.globalAlpha=.38;ctx.drawImage(ED.ghost,0,0,W,H);ctx.restore()}
+    if(ED.guide)drawGuide(ctx,W,H,view);
+  }
+}
+function edDraw(){renderTo(edCtx,true);$('edRot').value=ED.rot;$('edRotV').textContent=ED.rot.toFixed(1)+'°';$('edZoom').value=ED.zoom;$('edZoomV').textContent=ED.zoom.toFixed(2)}
+async function openEditor(blob){
+  if(ED.img?._url)URL.revokeObjectURL(ED.img._url);
+  ED.img=await blobImg(blob);Object.assign(ED,{rot:0,zoom:1,px:0,py:0,flip:false,r180:view==='or_head'?false:false});
+  $('edGhost').value='';ED.ghost=null;$('edCard').classList.remove('hidden');$('edInfo').textContent=`${vName(view)} · ${phName(phase)}`;
+  edDraw();$('edCard').scrollIntoView({behavior:'smooth'});
+}
+$('edRot').oninput=e=>{ED.rot=+e.target.value;edDraw()};
+$('edZoom').oninput=e=>{ED.zoom=+e.target.value;edDraw()};
+$('edFlip').onclick=()=>{ED.flip=!ED.flip;edDraw()};
+$('ed180').onclick=()=>{ED.r180=!ED.r180;edDraw()};
+$('edGuide').onclick=()=>{ED.guide=!ED.guide;$('edGuide').textContent='Guide: '+(ED.guide?'On':'Off');edDraw()};
+$('edReset').onclick=()=>{Object.assign(ED,{rot:0,zoom:1,px:0,py:0,flip:false,r180:false});edDraw()};
+$('edCancel').onclick=()=>{$('edCard').classList.add('hidden');ED.img=null};
+$('edGhost').onchange=async e=>{
+  ED.ghost=null;const ph=e.target.value;
+  if(ph&&cur){const list=(await photosOf(cur.id)).filter(p=>p.view===view&&p.phase===ph).sort((a,b)=>b.date.localeCompare(a.date));if(list[0])ED.ghost=await blobImg(list[0].blob);else toast(`No ${phName(ph)} photo for this view`)}
+  edDraw();
+};
+// pointer pan + pinch
+const ptrs=new Map();let pinch0=null;
+edCv.addEventListener('pointerdown',e=>{edCv.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY})});
+edCv.addEventListener('pointermove',e=>{
+  if(!ptrs.has(e.pointerId)||!ED.img)return;const prev=ptrs.get(e.pointerId);const k=ED.W/edCv.getBoundingClientRect().width;
+  ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===1){ED.px+=(e.clientX-prev.x)*k;ED.py+=(e.clientY-prev.y)*k}
+  else if(ptrs.size===2){const [a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch0){ED.zoom=Math.min(4,Math.max(.5,pinch0.z*d/pinch0.d))}else pinch0={d,z:ED.zoom}}
+  edDraw();
+});
+const up=e=>{ptrs.delete(e.pointerId);if(ptrs.size<2)pinch0=null};
+edCv.addEventListener('pointerup',up);edCv.addEventListener('pointercancel',up);
+$('edSave').onclick=async()=>{
+  if(!await needPatient())return;
+  const c=document.createElement('canvas');c.width=ED.W;c.height=ED.H;renderTo(c.getContext('2d'),false);
+  const blob=await canvasBlob(c,'image/jpeg',.92);
+  await dbPut('photos',{id:uid(),patientId:cur.id,view,phase,date:new Date().toISOString(),blob});
+  cur.updated=Date.now();await dbPut('patients',cur);
+  flash();toast(`Saved: ${vName(view)} · ${phName(phase)}`);$('edCard').classList.add('hidden');ED.img=null;
+  renderThumbs();fillPhotoSelects();
+};
+
+/* ---------- face landmarker ---------- */
+let FL=null,FLp=null;
+function getFL(){
+  if(FL)return Promise.resolve(FL);if(FLp)return FLp;
+  toast('Loading face model…',6000);
+  FLp=(async()=>{const m=await import(MP+'/vision_bundle.mjs');const fs=await m.FilesetResolver.forVisionTasks(MP+'/wasm');
+    const mk=d=>m.FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:MODEL,delegate:d},runningMode:'IMAGE',numFaces:1});
+    try{FL=await mk('GPU')}catch{FL=await mk('CPU')}return FL})();
+  FLp.catch(()=>{FLp=null});return FLp;
+}
+async function detect(img){
+  const fl=await getFL();const iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height;const k=Math.min(1,1280/Math.max(iw,ih));
+  const c=document.createElement('canvas');c.width=Math.round(iw*k);c.height=Math.round(ih*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+  const r=fl.detect(c);const lm=r.faceLandmarks?.[0];if(!lm)return null;return lm.map(p=>({x:p.x*iw,y:p.y*ih}));
+}
+$('edAuto').onclick=async()=>{
+  if(!ED.img)return;let P;try{P=await detect(ED.img)}catch(e){toast('Face model could not load (internet needed once)');return}
+  if(!P){toast('Face not detected · align manually');return}
+  const iw=ED.img.naturalWidth,ih=ED.img.naturalHeight,cx=iw/2,cy=ih/2,F=ED.flip?-1:1;
+  const fx=p=>({x:F*(p.x-cx),y:p.y-cy});
+  let rotTot=(ED.r180?180:0),scaleT,anchor,target;
+  const useEyes=['frontal','r_oblique','l_oblique','or_head'].includes(view);
+  if(useEyes){const a=fx(P[33]),b=fx(P[263]);rotTot=-Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;if(view==='or_head')rotTot+=180}
+  if(view==='frontal'||view==='or_head'){const d=Math.hypot(P[263].x-P[33].x,P[263].y-P[33].y);scaleT=.40*ED.W/d;anchor=P[168];target={x:.5*ED.W,y:(view==='or_head'?.60:.40)*ED.H}}
+  else{const d=Math.hypot(P[152].x-P[168].x,P[152].y-P[168].y);scaleT=.42*ED.H/d;anchor=P[1];
+    const tx={r_oblique:.5,l_oblique:.5,r_lateral:.62,l_lateral:.38,basal:.5,helicopter:.5}[view]??.5;const ty={basal:.36,helicopter:.70}[view]??.58;target={x:tx*ED.W,y:ty*ED.H}}
+  let rot=((rotTot-(ED.r180?180:0))%360+540)%360-180;
+  ED.rot=Math.max(-30,Math.min(30,rot));if(Math.abs(rot)>30){if(Math.abs(Math.abs(rot)-180)<30){ED.r180=!ED.r180;ED.rot=((rot+360)%360)-180}}
+  ED.zoom=Math.min(4,Math.max(.5,scaleT/baseScale()));
+  const th=(ED.rot+(ED.r180?180:0))*Math.PI/180,s=baseScale()*ED.zoom,q=fx(anchor);
+  const rx=Math.cos(th)*q.x*s-Math.sin(th)*q.y*s,ry=Math.sin(th)*q.x*s+Math.cos(th)*q.y*s;
+  ED.px=target.x-ED.W/2-rx;ED.py=target.y-ED.H/2-ry;edDraw();toast('Auto-aligned · fine-tune if needed');
+};
+
+/* ---------- thumbnails ---------- */
+let thumbURLs=[];
+async function renderThumbs(){
+  thumbURLs.forEach(u=>URL.revokeObjectURL(u));thumbURLs=[];
+  const el=$('thumbs');$('thumbTitle').textContent=cur?(patLabel(cur)||'(unnamed)'):'no patient selected';
+  if(!cur){el.innerHTML='<p class="hint">Create or select a patient at the top.</p>';return}
+  const list=(await photosOf(cur.id)).sort((a,b)=>a.date.localeCompare(b.date));
+  if(!list.length){el.innerHTML='<p class="hint">No photos yet.</p>';return}
+  el.innerHTML=VIEWS.map(v=>{const ps=list.filter(p=>p.view===v.k);if(!ps.length)return'';
+    return`<div class="vgroup"><h4>${v.n}</h4><div class="thumbs">${ps.map(p=>{const u=URL.createObjectURL(p.blob);thumbURLs.push(u);return`<div class="thumb" data-id="${p.id}"><img src="${u}" alt=""><span>${phName(p.phase)} · ${p.date.slice(0,10)}</span></div>`}).join('')}</div></div>`}).join('');
+}
+let mPhoto=null;
+$('thumbs').onclick=async e=>{const t=e.target.closest('.thumb');if(!t)return;mPhoto=await dbGet('photos',t.dataset.id);if(!mPhoto)return;
+  $('mImg').src=t.querySelector('img').src;$('mInfo').textContent=`${vName(mPhoto.view)} · ${phName(mPhoto.phase)} · ${new Date(mPhoto.date).toLocaleString()}`;$('modal').classList.remove('hidden')};
+$('mClose').onclick=()=>$('modal').classList.add('hidden');
+$('mDel').onclick=async()=>{if(!mPhoto||!confirm('Delete this photo permanently?'))return;await dbDel('photos',mPhoto.id);$('modal').classList.add('hidden');renderThumbs();fillPhotoSelects();toast('Photo deleted')};
+$('mShare').onclick=()=>mPhoto&&shareOrDownload(mPhoto.blob,`RITA_${mPhoto.view}_${mPhoto.phase}_${mPhoto.date.slice(0,10)}.jpg`);
+$('mAna').onclick=()=>{if(!mPhoto)return;$('modal').classList.add('hidden');go('face');$('faPhoto').value=mPhoto.id;runFace()};
+
+/* ---------- patient form ---------- */
+let formItems={};
+function renderItems(){
+  for(const g of['G','M']){$('items'+g).innerHTML=ITEMS.filter(i=>i.g===g).map(i=>`<button class="item ${formItems[i.k]||''}" data-k="${i.k}">${i.n}</button>`).join('')}
+}
+['itemsG','itemsM'].forEach(id=>$(id).onclick=e=>{const b=e.target.closest('.item');if(!b)return;const s=formItems[b.dataset.k];formItems[b.dataset.k]=!s?'done':s==='done'?'not':undefined;if(!formItems[b.dataset.k])delete formItems[b.dataset.k];renderItems()});
+const F={first:'fFirst',last:'fLast',chart:'fChart',sex:'fSex',birth:'fBirth',date:'fDate',procedure:'fProc',approach:'fAppr',hospital:'fHosp',notes:'fNotes'};
+function renderPatientForm(){
+  for(const[k,id]of Object.entries(F))$(id).value=cur?.[k]??(k==='procedure'?'Primary rhinoplasty':'');
+  $('fConsent').checked=!!cur?.consent;formItems={...(cur?.items||{})};renderItems();
+}
+$('btnSavePat').onclick=async()=>{
+  if(!cur){cur={id:uid(),created:Date.now()}}
+  for(const[k,id]of Object.entries(F))cur[k]=$(id).value.trim();
+  cur.consent=$('fConsent').checked;cur.items={...formItems};cur.updated=Date.now();
+  await dbPut('patients',cur);await refreshPatients(cur.id);toast('Patient saved');
+};
+$('btnDelPat').onclick=async()=>{if(!cur||!confirm('Delete this patient and ALL their photos permanently?'))return;
+  for(const p of await photosOf(cur.id))await dbDel('photos',p.id);await dbDel('patients',cur.id);cur=null;await refreshPatients('');toast('Patient deleted')};
+
+function detectItems(text){
+  let t=' '+lower(text)+' ';const found={};
+  const syns=ITEMS.flatMap(i=>i.s.map(s=>({k:i.k,s:lower(s)}))).sort((a,b)=>b.s.length-a.s.length);
+  const isL=c=>/\p{L}/u.test(c);
+  for(const {k,s} of syns){
+    let idx=t.indexOf(s);
+    while(idx>=0){
+      const before=t[idx-1],after=t[idx+s.length];
+      if(!isL(before)&&!isL(after||' ')){
+        let end=idx+s.length;while(end<t.length&&!/[.,;\n]/.test(t[end]))end++;
+        let start=idx;while(start>0&&!/[.,;\n]/.test(t[start-1]))start--;
+        const clause=t.slice(start,end);const tail=t.slice(idx+s.length,end),head=t.slice(start,idx);
+        const neg=NEG.some(n=>tail.includes(n.trim()))||/\b(no|not|without)\s+$/.test(head)||/(^|\s)(no|without)\s/.test(head);
+        if(found[k]!=='done')found[k]=neg?'not':'done';
+        t=t.slice(0,idx)+' '.repeat(s.length)+t.slice(idx+s.length);void clause;
+      }
+      idx=t.indexOf(s,idx+1);
+    }
+  }
+  return found;
+}
+$('btnDetect').onclick=()=>{const f=detectItems($('fNotes').value);const n=Object.keys(f).length;if(!n){toast('No known steps found in notes');return}Object.assign(formItems,f);renderItems();toast(`${n} step(s) detected · please review, then Save`)};
+
+function renderPList(){
+  const q=lower($('pSearch').value);
+  const list=patients.filter(p=>{if(!q)return true;const hay=lower([p.first,p.last,p.chart,p.procedure,p.hospital,p.notes,...Object.entries(p.items||{}).filter(([,v])=>v==='done').map(([k])=>ITEMS.find(i=>i.k===k)?.n)].join(' '));return q.split(/\s+/).every(w=>hay.includes(w))});
+  $('pList').innerHTML=list.length?list.map(p=>`<div class="pi" data-id="${p.id}"><div><b>${esc(patLabel(p))||'(unnamed)'}</b><br><small>${esc(p.procedure||'')} ${p.date?'· '+p.date:''} ${p.hospital?'· '+esc(p.hospital):''}</small></div><small>${Object.values(p.items||{}).filter(v=>v==='done').length} steps</small></div>`).join(''):'<p class="hint">No patients found.</p>';
+}
+$('pSearch').oninput=renderPList;
+$('pList').onclick=async e=>{const r=e.target.closest('.pi');if(!r)return;cur=patients.find(p=>p.id===r.dataset.id);$('curSel').value=cur.id;await setSet('lastPatient',cur.id);renderPatientForm();renderThumbs();fillPhotoSelects();window.scrollTo({top:0,behavior:'smooth'})};
+
+/* ---------- photo selects (compare / face) ---------- */
+async function fillPhotoSelects(){
+  const opts=PHASES.map(p=>`<option value="${p.k}">${p.n}</option>`).join('');
+  if(!$('cA').options.length){$('cA').innerHTML=opts;$('cB').innerHTML=opts;$('cA').value='preop';$('cB').value='postop'}
+  const list=cur?(await photosOf(cur.id)).sort((a,b)=>b.date.localeCompare(a.date)):[];
+  const have=new Set(list.map(p=>p.view));
+  $('cViews').innerHTML=VIEWS.map(v=>`<button data-k="${v.k}" class="${have.has(v.k)?'on':''}">${v.n}</button>`).join('');
+  $('sView').innerHTML=VIEWS.filter(v=>have.has(v.k)).map(v=>`<option value="${v.k}">${v.n}</option>`).join('')||'<option value="">No photos</option>';
+  const fr=list.filter(p=>['frontal'].includes(p.view));const others=list.filter(p=>p.view!=='frontal');
+  $('faPhoto').innerHTML=(fr.concat(others)).map(p=>`<option value="${p.id}">${vName(p.view)} · ${phName(p.phase)} · ${p.date.slice(0,10)}</option>`).join('')||'<option value="">No photos for this patient</option>';
+  updateSlider();
+}
+$('cViews').onclick=e=>{const b=e.target.closest('button');if(b)b.classList.toggle('on')};
+
+/* ---------- collage ---------- */
+let collageBlob=null;
+async function latest(list,v,ph){return list.filter(p=>p.view===v&&p.phase===ph).sort((a,b)=>b.date.localeCompare(a.date))[0]}
+$('cMake').onclick=async()=>{
+  if(!await needPatient())return;const list=await photosOf(cur.id);const A=$('cA').value,B=$('cB').value,anon=$('cAnon').checked;
+  const views=[...$('cViews').querySelectorAll('button.on')].map(b=>b.dataset.k);
+  const rows=[];for(const v of views){const a=await latest(list,v,A),b=await latest(list,v,B);if(a||b)rows.push({v,a,b})}
+  if(!rows.length){toast('No matching photos for the selected views/phases');return}
+  const cw=600,ch=800,g=14,lab=54,head=130,W=cw*2+g*3,H=head+rows.length*(ch+lab+g)+g+40;
+  const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  x.fillStyle='#06111f';x.fillRect(0,0,W,H);x.fillStyle='#2df28a';x.font='700 44px -apple-system,Arial';x.fillText('RITA',g+6,58);
+  x.fillStyle='#edf5ff';x.font='600 30px -apple-system,Arial';x.fillText(`${phName(A)}  vs  ${phName(B)}`,g+140,58);
+  x.fillStyle='#9ab0cd';x.font='26px -apple-system,Arial';x.fillText(patLabel(cur,anon)+(cur.date?`  ·  Surgery ${cur.date}`:''),g+6,104);
+  let y=head;
+  for(const r of rows){
+    x.fillStyle='#35d7ff';x.font='600 28px -apple-system,Arial';x.fillText(vName(r.v),g+6,y+36);y+=lab;
+    for(const[i,p]of[[0,r.a],[1,r.b]]){const X=g+i*(cw+g);x.fillStyle='#000';x.fillRect(X,y,cw,ch);
+      if(p){const im=await blobImg(p.blob);x.drawImage(im,X,y,cw,ch);URL.revokeObjectURL(im._url);x.fillStyle='rgba(0,0,0,.6)';x.fillRect(X,y+ch-44,cw,44);x.fillStyle='#fff';x.font='22px -apple-system,Arial';x.fillText(`${phName(i?B:A)} · ${p.date.slice(0,10)}`,X+12,y+ch-14)}
+      else{x.fillStyle='#9ab0cd';x.font='24px -apple-system,Arial';x.fillText('No photo',X+cw/2-50,y+ch/2)}}
+    y+=ch+g;
+  }
+  x.fillStyle='#9ab0cd';x.font='20px -apple-system,Arial';x.fillText('Generated with RITA · '+new Date().toLocaleDateString(),g+6,H-16);
+  collageBlob=await canvasBlob(c,'image/jpeg',.9);const im=$('collageImg');if(im.src.startsWith('blob:'))URL.revokeObjectURL(im.src);im.src=URL.createObjectURL(collageBlob);im.classList.remove('hidden');$('cShare').disabled=false;
+};
+$('cShare').onclick=()=>collageBlob&&shareOrDownload(collageBlob,`RITA_collage_${(cur?.chart||'case')}_${new Date().toISOString().slice(0,10)}.jpg`);
+
+/* ---------- slider ---------- */
+async function updateSlider(){
+  const v=$('sView').value;const A=$('cA').value,B=$('cB').value;$('sLabA').textContent=phName(A);$('sLabB').textContent=phName(B);
+  for(const id of['sImgA','sImgB']){const i=$(id);if(i.src.startsWith('blob:'))URL.revokeObjectURL(i.src);i.removeAttribute('src')}
+  if(!cur||!v)return;const list=await photosOf(cur.id);const a=await latest(list,v,A),b=await latest(list,v,B);
+  if(a)$('sImgA').src=URL.createObjectURL(a.blob);if(b)$('sImgB').src=URL.createObjectURL(b.blob);clipSlider();
+}
+function clipSlider(){$('sImgA').style.clipPath=`inset(0 ${100-$('sRange').value}% 0 0)`}
+$('sRange').oninput=clipSlider;$('sView').onchange=updateSlider;$('cA').onchange=updateSlider;$('cB').onchange=updateSlider;
+
+/* ---------- face analysis ---------- */
+let faSummary='';
+async function runFace(blob){
+  let b=blob;if(!b){const id=$('faPhoto').value;const p=id&&await dbGet('photos',id);if(!p){toast('Choose a photo');return}b=p.blob}
+  const img=await blobImg(b);let P;try{P=await detect(img)}catch{toast('Face model could not load (internet needed once)');return}
+  if(!P){toast('Face not detected. Use a straight frontal photo.');return}
+  const sub=(a,c)=>({x:a.x-c.x,y:a.y-c.y}),dot=(a,c)=>a.x*c.x+a.y*c.y,len=a=>Math.hypot(a.x,a.y);
+  const m={x:(P[133].x+P[362].x)/2,y:(P[133].y+P[362].y)/2};const e=sub(P[362],P[133]);const ICD=len(e);const u={x:e.x/ICD,y:e.y/ICD},v={x:-u.y,y:u.x};
+  const d=i=>dot(sub(P[i],m),u),h=i=>dot(sub(P[i],m),v);
+  const side=x=>Math.abs(x)<.5?'midline':(x<0?"patient's right":"patient's left");
+  const ang=(i,j)=>{const w=sub(P[j],P[i]);return Math.atan2(dot(w,v),dot(w,u))*180/Math.PI};
+  const rows=[];const add=(name,val,unit,thr,note)=>rows.push({name,val,unit,flag:Math.abs(val)>thr,note});
+  for(const[n,i]of[['Nasion deviation',168],['Nasal tip deviation',1],['Subnasale deviation',2],['Chin (menton) deviation',152]]){const x=d(i)/ICD*100;add(n,x,'% ICD',4,side(x))}
+  const w=sub(P[1],P[168]);const dors=Math.atan2(dot(w,u),dot(w,v))*180/Math.PI;add('Dorsal axis vs facial midline',dors,'°',2,dors>0?"tip toward patient's left":dors<0?"tip toward patient's right":'');
+  const com=ang(61,291);add('Oral commissure tilt (vs eye line)',com,'°',2,com>0?"patient's left lower":com<0?"patient's right lower":'');
+  const ala=ang(98,327);add('Alar base tilt (vs eye line)',ala,'°',2,ala>0?"patient's left lower":ala<0?"patient's right lower":'');
+  const pairs=[['Outer canthus',33,263],['Alar width',129,358],['Oral commissure',61,291],['Zygomatic width',234,454],['Mandibular angle',172,397]];
+  const asyms=[];
+  for(const[n,r,l]of pairs){const R=Math.abs(d(r)),L=Math.abs(d(l));const a=(1-Math.min(R,L)/Math.max(R,L))*100;asyms.push(a);add(n+' (R/L from midline)',a,'% diff',5,(R>L?'right':'left')+' side wider')}
+  const mid=h(2)-h(168),low=h(152)-h(2);
+  const idx=asyms.reduce((s,x)=>s+x,0)/asyms.length;
+  // draw
+  const cv=$('faCv');const k=Math.min(1,1200/img.naturalWidth);cv.width=img.naturalWidth*k;cv.height=img.naturalHeight*k;const x=cv.getContext('2d');x.drawImage(img,0,0,cv.width,cv.height);x.scale(k,k);
+  const L=(a,b,c,wd=3)=>{x.strokeStyle=c;x.lineWidth=wd/k;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()};
+  const far=img.naturalHeight;L({x:m.x-v.x*far*.3,y:m.y-v.y*far*.3},{x:m.x+v.x*far,y:m.y+v.y*far},'#2df28a');
+  L({x:m.x-u.x*ICD*2,y:m.y-u.y*ICD*2},{x:m.x+u.x*ICD*2,y:m.y+u.y*ICD*2},'#35d7ff',2);
+  L(P[61],P[291],'#ffd166',2);L(P[98],P[327],'#ffd166',2);L(P[168],P[1],'#ff5570',3);
+  x.fillStyle='#ffd166';for(const i of[168,1,2,152,33,263,129,358,61,291,234,454,172,397,98,327]){x.beginPath();x.arc(P[i].x,P[i].y,4/k,0,7);x.fill()}
+  x.setTransform(1,0,0,1,0,0);URL.revokeObjectURL(img._url);
+  $('faKpi').innerHTML=`<div><b>${idx.toFixed(1)}%</b><small>Mean bilateral asymmetry</small></div><div><b>${(d(1)/ICD*100).toFixed(1)}%</b><small>Tip deviation (ICD)</small></div><div><b>${dors.toFixed(1)}°</b><small>Dorsal axis deviation</small></div><div><b>${(low/mid).toFixed(2)}</b><small>Lower / middle third (nasion-based)</small></div>`;
+  $('faTable').innerHTML='<tr><th>Measure</th><th>Value</th><th>Note</th></tr>'+rows.map(r=>`<tr><td>${r.name}</td><td class="${r.flag?'flag':'ok'}">${r.val.toFixed(1)} ${r.unit}</td><td>${r.note}</td></tr>`).join('');
+  $('faOut').classList.remove('hidden');$('faSave').disabled=!cur;
+  faSummary=`Mean bilateral asymmetry ${idx.toFixed(1)}%. `+rows.filter(r=>r.flag).map(r=>`${r.name}: ${r.val.toFixed(1)} ${r.unit} (${r.note})`).join('; ')+(rows.some(r=>r.flag)?'.':'No notable deviation above thresholds.');
+}
+$('faRun').onclick=()=>runFace();
+$('faFile').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)runFace(f)};
+$('faSave').onclick=async()=>{if(!cur||!faSummary)return;cur.faceAnalysis=faSummary+` (${new Date().toISOString().slice(0,10)})`;cur.updated=Date.now();await dbPut('patients',cur);toast('Analysis saved to patient record')};
+
+/* ---------- op note ---------- */
+$('phList').innerHTML=PLACEHOLDERS.map(p=>`<code data-p="${p}">{{${p}}}</code>`).join('');
+$('phList').onclick=e=>{const c=e.target.closest('code');if(!c)return;const t=$('tpl');const s=t.selectionStart??t.value.length;t.value=t.value.slice(0,s)+`{{${c.dataset.p}}}`+t.value.slice(t.selectionEnd??s);t.focus()};
+$('tplSave').onclick=async()=>{await setSet('template',$('tpl').value);toast('Template saved')};
+$('tplDefault').onclick=()=>{if(confirm('Replace with the default template?'))$('tpl').value=DEFAULT_TPL};
+$('tplFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;$('tpl').value=await f.text();await setSet('template',$('tpl').value);toast('Template loaded and saved')};
+$('noteGen').onclick=async()=>{
+  if(!await needPatient())return;const p=cur;const it=p.items||{};
+  const listOf=(g,st)=>{const a=ITEMS.filter(i=>(!g||i.g===g)&&it[i.k]===st).map(i=>'- '+i.n);return a.length?a.join('\n'):'- None recorded'};
+  const vals={name:[p.first,p.last].filter(Boolean).join(' '),chart:p.chart||'',age:ageOf(p)??'',sex:p.sex||'',date:p.date||'',hospital:p.hospital||'',surgeon:await getSet('surgeon',''),procedure:p.procedure||'',approach:p.approach||'',grafts:listOf('G','done'),maneuvers:listOf('M','done'),not_done:listOf(null,'not'),notes:p.notes||'',face_analysis:p.faceAnalysis||'Not performed'};
+  $('noteOut').value=$('tpl').value.replace(/\{\{\s*(\w+)\s*\}\}/g,(m,k)=>k in vals?vals[k]:m);
+};
+$('noteCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('noteOut').value);toast('Copied')}catch{$('noteOut').select();document.execCommand('copy');toast('Copied')}};
+$('noteShare').onclick=()=>shareOrDownload(new Blob([$('noteOut').value],{type:'text/plain'}),`RITA_note_${cur?.chart||'case'}.txt`);
+
+/* ---------- research ---------- */
+const rSel=new Set();let rResults=[];
+function renderRItems(){$('rItems').innerHTML=ITEMS.map(i=>`<button class="chip ${rSel.has(i.k)?'on':''}" data-k="${i.k}">${i.n}</button>`).join('')}
+$('rItems').onclick=e=>{const b=e.target.closest('button');if(!b)return;rSel.has(b.dataset.k)?rSel.delete(b.dataset.k):rSel.add(b.dataset.k);renderRItems()};
+$('rParse').onclick=()=>{const q=$('rQuick').value;const f=detectItems(q);rSel.clear();Object.keys(f).forEach(k=>rSel.add(k));const l=lower(q);
+  $('rSex').value=/\b(female|women|woman)\b|kadın/.test(l)?'Female':/\b(male|men|man)\b|erkek/.test(l)?'Male':'';
+  $('rProc').value=/revision|revizyon/.test(l)?'Revision rhinoplasty':/primary|primer/.test(l)?'Primary rhinoplasty':/septorhino|septorino/.test(l)?'Septorhinoplasty':'';
+  renderRItems();runResearch()};
+$('rClear').onclick=()=>{rSel.clear();['rSex','rProc','rFrom','rTo','rQuick'].forEach(i=>$(i).value='');renderRItems();$('rOut').classList.add('hidden')};
+function runResearch(){
+  const sx=$('rSex').value,pr=$('rProc').value,fr=$('rFrom').value,to=$('rTo').value;
+  rResults=patients.filter(p=>[...rSel].every(k=>p.items?.[k]==='done')&&(!sx||p.sex===sx)&&(!pr||p.procedure===pr)&&(!fr||(p.date&&p.date>=fr))&&(!to||(p.date&&p.date<=to)));
+  const n=rResults.length;const ages=rResults.map(ageOf).filter(a=>a!=null).sort((a,b)=>a-b);
+  const mean=ages.length?ages.reduce((s,a)=>s+a,0)/ages.length:0;const sd=ages.length>1?Math.sqrt(ages.reduce((s,a)=>s+(a-mean)**2,0)/(ages.length-1)):0;
+  const med=ages.length?(ages.length%2?ages[(ages.length-1)/2]:(ages[ages.length/2-1]+ages[ages.length/2])/2):0;
+  const cnt=k=>rResults.filter(p=>p.sex===k).length;const pct=x=>n?(x/n*100).toFixed(1)+'%':'–';
+  $('rKpi').innerHTML=`<div><b>${n}</b><small>Patients</small></div><div><b>${cnt('Female')} / ${cnt('Male')}</b><small>Female / Male (${pct(cnt('Female'))} / ${pct(cnt('Male'))})</small></div><div><b>${ages.length?mean.toFixed(1)+' ± '+sd.toFixed(1):'–'}</b><small>Age mean ± SD (n=${ages.length})</small></div><div><b>${ages.length?med+' ('+ages[0]+'–'+ages[ages.length-1]+')':'–'}</b><small>Age median (range)</small></div>`;
+  const procs={};rResults.forEach(p=>procs[p.procedure||'–']=(procs[p.procedure||'–']||0)+1);
+  const co=ITEMS.filter(i=>!rSel.has(i.k)).map(i=>({n:i.n,c:rResults.filter(p=>p.items?.[i.k]==='done').length})).filter(x=>x.c).sort((a,b)=>b.c-a.c);
+  $('rCo').innerHTML=n?`<p class="hint"><b>Procedures:</b> ${Object.entries(procs).map(([k,v])=>`${esc(k)} ${v} (${pct(v)})`).join(' · ')}</p><p class="hint"><b>Other steps in this group:</b> ${co.map(x=>`${x.n} ${x.c} (${pct(x.c)})`).join(' · ')||'–'}</p>`:'';
+  $('rTable').innerHTML='<tr><th>Chart</th><th>Name</th><th>Sex</th><th>Age</th><th>Date</th><th>Procedure</th><th>Steps</th></tr>'+rResults.map(p=>`<tr><td>${esc(p.chart)}</td><td>${esc([p.first,p.last].join(' '))}</td><td>${esc(p.sex)}</td><td>${ageOf(p)??''}</td><td>${esc(p.date)}</td><td>${esc(p.procedure)}</td><td>${ITEMS.filter(i=>p.items?.[i.k]==='done').map(i=>i.n).join(', ')}</td></tr>`).join('');
+  $('rOut').classList.remove('hidden');$('rCsv').disabled=!n;
+}
+$('rRun').onclick=runResearch;
+$('rCsv').onclick=()=>{
+  const q=s=>`"${String(s??'').replace(/"/g,'""')}"`;
+  const head=['case_id','chart','sex','age','surgery_date','procedure','approach',...ITEMS.map(i=>i.k)];
+  const lines=[head.join(',')].concat(rResults.map((p,i)=>[i+1,p.chart,p.sex,ageOf(p)??'',p.date,p.procedure,p.approach,...ITEMS.map(it=>p.items?.[it.k]==='done'?1:p.items?.[it.k]==='not'?0:'')].map(q).join(',')));
+  shareOrDownload(new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv'}),`RITA_research_${new Date().toISOString().slice(0,10)}.csv`);
+};
+
+/* ---------- backup ---------- */
+async function renderStats(){
+  const ph=await dbAll('photos');const est=await navigator.storage?.estimate?.();const pers=await navigator.storage?.persisted?.();const last=await getSet('lastBackup','');
+  $('bStats').innerHTML=`<div><b>${patients.length}</b><small>Patients</small></div><div><b>${ph.length}</b><small>Photos</small></div><div><b>${est?(est.usage/1048576).toFixed(0)+' MB':'–'}</b><small>Storage used</small></div><div><b>${last?last.slice(0,10):'Never'}</b><small>Last backup · ${pers?'persistent':'not persistent'}</small></div>`;
+}
+$('bExport').onclick=async()=>{
+  if(!window.JSZip){toast('ZIP library not loaded (internet needed)');return}
+  toast('Preparing backup…',8000);const z=new JSZip();const ph=await dbAll('photos');
+  z.file('data.json',JSON.stringify({app:'RITA',version:3,exported:new Date().toISOString(),patients,photos:ph.map(({blob,...m})=>({...m,file:`photos/${m.id}.jpg`})),settings:await dbAll('settings')},null,1));
+  for(const p of ph)z.file(`photos/${p.id}.jpg`,p.blob);
+  const blob=await z.generateAsync({type:'blob'});await setSet('lastBackup',new Date().toISOString());
+  await shareOrDownload(blob,`RITA_backup_${new Date().toISOString().slice(0,10)}.zip`);renderStats();
+};
+$('bImport').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f||!window.JSZip)return;
+  try{const z=await JSZip.loadAsync(f);const data=JSON.parse(await z.file('data.json').async('string'));
+    if(!confirm(`Import ${data.patients.length} patients and ${data.photos.length} photos? Existing records with the same ID will be overwritten.`))return;
+    for(const p of data.patients)await dbPut('patients',p);
+    for(const m of data.photos){const fl=z.file(m.file);if(!fl)continue;const b=await fl.async('blob');const{file,...rest}=m;await dbPut('photos',{...rest,blob:new Blob([b],{type:'image/jpeg'})})}
+    for(const s of data.settings||[])if(s.key!=='lastPatient')await dbPut('settings',s);
+    await refreshPatients();renderStats();toast('Backup imported');
+  }catch(err){toast('Import failed: '+err.message)}
+};
+$('bPersist').onclick=async()=>{const ok=await navigator.storage?.persist?.();toast(ok?'Persistent storage granted':'Not granted · add RITA to Home Screen and try again');renderStats()};
+$('sSaveSet').onclick=async()=>{await setSet('surgeon',$('sSurgeon').value.trim());toast('Settings saved')};
+
+/* ---------- init ---------- */
+(async()=>{
+  db=await openDB();
+  $('tpl').value=await getSet('template',DEFAULT_TPL);$('sSurgeon').value=await getSet('surgeon','');
+  renderRItems();await refreshPatients(await getSet('lastPatient',''));
+  navigator.storage?.persist?.();
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopLive()});
+  // keep editor canvas crisp after rotation
+  window.addEventListener('orientationchange',()=>setTimeout(()=>{if(ED.img)edDraw()},300));
+})();
+</script>
+</body>
+</html>
